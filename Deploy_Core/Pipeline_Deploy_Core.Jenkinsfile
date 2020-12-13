@@ -30,7 +30,7 @@ parameters {
                             cleanWs()
                             sh 'env'
                             checkout([$class: 'GitSCM', 
-                            branches: [[name: '*/Test']], 
+                            branches: [[name: '*/main']], 
                             doGenerateSubmoduleConfigurations: false, 
                             extensions: [[$class: 'CleanCheckout']], 
                             submoduleCfg: [], 
