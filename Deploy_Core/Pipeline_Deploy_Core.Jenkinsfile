@@ -41,7 +41,7 @@ parameters {
                             sh 'ls -l'
                             sh '''
                                 #!/bin/bash
-                                cd "${Deploy_Core}" 
+                                cd ~/Deploy_Core
                             '''    
                             sh 'pwd' 
                             sh 'terraform --version'
