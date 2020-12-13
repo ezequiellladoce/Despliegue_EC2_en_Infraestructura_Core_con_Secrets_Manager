@@ -39,7 +39,7 @@ parameters {
                             ]])
                             sh 'pwd' 
                             sh 'ls -l'
-                            sh 'cd Deploy_Core'
+                            sh 'cd "${Deploy_Core}" '
                             sh 'pwd' 
                             sh 'terraform --version'
                             sh 'terraform init'
