@@ -38,8 +38,7 @@ En la carpeta Deploy_Core tendremos el código para crear la infraestuctura Core
 
 Con el recurso aws_secretsmanager_secret Creamos en la infraestructura core el Secrets en el servicio de AWS Secret Manager. El código es el Siguinte:
 
-''' 
-
+```
 resource "aws_secretsmanager_secret" "secret_key" {
   name = var.Secret_Key
   description = "Name of the secret key"
@@ -47,28 +46,16 @@ resource "aws_secretsmanager_secret" "secret_key" {
     Name = "EC2-Key-4"
   }
 }
-
-'''
+```
 
 Con el recurso aws_secretsmanager_secret_version cargamos la clave creada por el recurso tls_private_key. El código es el Siguinte:
 
-'''
-
+```
 resource "aws_secretsmanager_secret_version" "secret_priv" {
   secret_id     = aws_secretsmanager_secret.secret_key.id
   secret_string = tls_private_key.priv_key.private_key_pem
 }
-
-'''
-
-
-
-
-
-
-
-
-
+```
 
 ### Preparamos el ambiente:
 
@@ -78,7 +65,6 @@ resource "aws_secretsmanager_secret_version" "secret_priv" {
 4) Creamos usario AWS en la seccion IAM con acceso Programatico y permisos de administrador https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html   
 5) Configuramos el AWS CLI https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html
 6) Creamos un Buket S3 con las carpetas tfbkcore y tfbkec2
-
 
 ## Despliegue 📦
 
