@@ -41,7 +41,8 @@ parameters {
                             sh 'ls -l'
                             sh '''
                                 #!/bin/bash
-                                cd ~/Deploy_Core
+                                chmod -R 777 ./
+                                cd Deploy_Core
                             '''    
                             sh 'pwd' 
                             sh 'terraform --version'
