@@ -1,11 +1,7 @@
 # DESPLIEGE DE UNA INSTANCIA EC2 EN INFRAESTRUCTURA YA CREADA MEDIANTE EL USO DE BACKEND EN S3 CON TERRAFORM 
 
-El objetivo de este repositorio es mostrar como desplegar automáticamente desde terraform una instancia de AWS dentro de una infraestuctura core ya creada mediante el uso de la funcion Backend de terraform almacenada en un S3.
+El objetivo de este repositorio es mostrar como desplegar automáticamente desde terraform una instancia de AWS dentro de una infraestuctura core ya creada mediante el uso de la funcion Backend de terraform almacenada en un S3. 
 
-En la carpeta Deploy_Core tendremos la infraestuctura Core en la que crearemos:
- -VPC
- -Secutity Groups
- -
 
 ## Pre-requisitos 📋
 
@@ -15,12 +11,27 @@ En la carpeta Deploy_Core tendremos la infraestuctura Core en la que crearemos:
 
 ## Comenzando 🚀
 
+Preparamos el ambiente:
+
 1) Instalalamos Terrafom https://learn.hashicorp.com/tutorials/terraform/install-cli
 2) Creamos cuenta free tier en AWS  https://aws.amazon.com/
 3) Instalamos AWS CLI https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
 4) Creamos usario AWS en la seccion IAM con acceso Programatico y permisos de administrador https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html   
 5) Configuramos el AWS CLI https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html
+6) Creamos un Buket S3 con las carpetas tfbkcore y tfbkec2
 
+
+
+En la carpeta Deploy_Core tendremos la infraestuctura Core en la que crearemos:
+
+ - Infraestrucura basica aws (VPC - Security Groups - Internet Gateway - Subnet - Route Table)
+ - Creamos desde terraform la Private Key
+ - Almacenamos la clave  creada en aws secretsmanager
+ - Creamos los outputs de los parametros Subnet ID y Security Group ID
+ - Guardamos con la función Backend en S3 la informacion de la infraestuctura creada.
+ 
+ En La carpeta Deploy_Ec2 tenemos el codigo para crear la Instancia EC2 dentro de la infraestructura creada,  
+ 
 ## Despliegue 📦
 
 ### Consideraciones iniciales
@@ -41,5 +52,3 @@ En la carpeta Deploy_Core tendremos la infraestuctura Core en la que crearemos:
 
 ## Información de referencia 🛠️
 
-https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-docker/#manage
-https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html
