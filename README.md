@@ -1,7 +1,6 @@
-# DESPLIEGE DE UNA INSTANCIA EC2 EN INFRAESTRUCTURA YA CREADA MEDIANTE EL USO DE BACKEND EN S3 CON TERRAFORM 
+# DESPLIEGE DE EC2 EN INFRAESTRUCTURA CORE MEDIANTE EL USO DE BACKEND EN S3 CON TERRAFORM 
 
-El objetivo de este repositorio es mostrar como desplegar automáticamente desde terraform una instancia de AWS dentro de una infraestuctura core ya creada mediante el uso de la funcion Backend de terraform almacenada en un S3. 
-
+El objetivo de este repositorio es mostrar como desplegar automáticamente desde terraform una instancia de AWS dentro de una infraestructura core ya creada mediante el uso de el recurso Terraform Backend almacenada en un S3. 
 
 ## Pre-requisitos 📋
 
@@ -13,22 +12,22 @@ El objetivo de este repositorio es mostrar como desplegar automáticamente desde
 
 ### Descripción del repositorio:
 
-En la carpeta Deploy_Core tendremos el código para crear la infraestuctura Core, alli monatremos:
+En la carpeta Deploy_Core tendremos el código para crear la infraestructura base, esta permitirá:
 
- - Infraestrucura basica aws (VPC - Security Groups - Internet Gateway - Subnet - Route Table)
+ - Infraestructura básica aws (VPC - Security Groups - Internet Gateway - Subnet - Route Table)
  - Creamos desde terraform la Private Key
- - Almacenamos la clave  creada en aws secretsmanager
- - Creamos los outputs de los parametros Subnet ID y Security Group ID
+ - Almacenamos la clave  creada en Aws Secrets Manager
+ - Creamos los outputs de los parámetros Subnet ID y Security Group ID
  - Guardamos con la función Backend en S3 la informacion de la infraestuctura creada.
  
- En La carpeta Deploy_Ec2, alli montaremos:
+ En La carpeta Deploy_Ec2 tendremos el código para crear la instancia EC2, este permitirá:
  
- - El codigo para crear la Instancia EC2 con la información almacenada en el Backed de S3.
+ - El código para crear la Instancia EC2 con la información almacenada en el Backed de S3.
  - Creamos el output Public Ip y lo almacenamos en el Backend de la instancia
  
- En La carpeta Public_ip_from_backend, alli montaremos:
+ En La carpeta Public_ip_from_backend tendremos el código para obtener la ip publica de la instancia: 
  
- - El codigo hace un output de la ip publica de la instancia creada desde el backend, con la ip Publica y la clave pem almacenada en el Secret Manager podremos    configurar la instancia mediante Ansible.
+ - El código hace un output de la ip publica de la instancia creada desde el backend del EC2, con la ip Publica y la clave pem almacenada en el Secret Manager podremos configurar la instancia mediante Ansible.
 
 ### Descripción del Código:
 
