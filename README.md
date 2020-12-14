@@ -39,6 +39,7 @@ En la carpeta Deploy_Core tendremos el código para crear la infraestuctura Core
 Con el recurso aws_secretsmanager_secret Creamos en la infraestructura core el Secrets en el servicio de AWS Secret Manager. El código es el Siguinte:
 
 ''' 
+
 resource "aws_secretsmanager_secret" "secret_key" {
   name = var.Secret_Key
   description = "Name of the secret key"
@@ -46,15 +47,18 @@ resource "aws_secretsmanager_secret" "secret_key" {
     Name = "EC2-Key-4"
   }
 }
+
 '''
 
 Con el recurso aws_secretsmanager_secret_version cargamos la clave creada por el recurso tls_private_key. El código es el Siguinte:
 
 '''
+
 resource "aws_secretsmanager_secret_version" "secret_priv" {
   secret_id     = aws_secretsmanager_secret.secret_key.id
   secret_string = tls_private_key.priv_key.private_key_pem
 }
+
 '''
 
 
@@ -75,25 +79,7 @@ resource "aws_secretsmanager_secret_version" "secret_priv" {
 5) Configuramos el AWS CLI https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html
 6) Creamos un Buket S3 con las carpetas tfbkcore y tfbkec2
 
-### Decripción del repositorio:
 
-En la carpeta Deploy_Core tendremos el código para crear la infraestuctura Core, alli monatremos:
-
- - Infraestrucura basica aws (VPC - Security Groups - Internet Gateway - Subnet - Route Table)
- - Creamos desde terraform la Private Key
- - Almacenamos la clave  creada en aws secretsmanager
- - Creamos los outputs de los parametros Subnet ID y Security Group ID
- - Guardamos con la función Backend en S3 la informacion de la infraestuctura creada.
- 
- En La carpeta Deploy_Ec2, alli montaremos:
- 
- - El codigo para crear la Instancia EC2 con la información almacenada en el Backed de S3.
- - Creamos el output Public Ip y lo almacenamos en el Backend de la instancia
- 
- En La carpeta Public_ip_from_backend, alli montaremos:
- 
- - El codigo hace un output de la ip publica de la instancia creada desde el backend, con la ip Publica y la clave pem almacenada en el Secret Manager podremos    configurar la instancia mediante Ansible.
-  
 ## Despliegue 📦
 
 ### Consideraciones iniciales
