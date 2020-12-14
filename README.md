@@ -11,7 +11,7 @@ El objetivo de este repositorio es mostrar como desplegar automáticamente desde
 
 ## Comenzando 🚀
 
-Preparamos el ambiente:
+######Preparamos el ambiente:
 
 1) Instalalamos Terrafom https://learn.hashicorp.com/tutorials/terraform/install-cli
 2) Creamos cuenta free tier en AWS  https://aws.amazon.com/
@@ -20,9 +20,9 @@ Preparamos el ambiente:
 5) Configuramos el AWS CLI https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html
 6) Creamos un Buket S3 con las carpetas tfbkcore y tfbkec2
 
+######Decripción del repositorio:
 
-
-En la carpeta Deploy_Core tendremos la infraestuctura Core en la que crearemos:
+En la carpeta Deploy_Core tendremos el código para crear la infraestuctura Core, alli monatremos:
 
  - Infraestrucura basica aws (VPC - Security Groups - Internet Gateway - Subnet - Route Table)
  - Creamos desde terraform la Private Key
@@ -30,7 +30,21 @@ En la carpeta Deploy_Core tendremos la infraestuctura Core en la que crearemos:
  - Creamos los outputs de los parametros Subnet ID y Security Group ID
  - Guardamos con la función Backend en S3 la informacion de la infraestuctura creada.
  
- En La carpeta Deploy_Ec2 tenemos el codigo para crear la Instancia EC2 dentro de la infraestructura creada,  
+ En La carpeta Deploy_Ec2, alli montaremos:
+ 
+ - El codigo para crear la Instancia EC2 con la información almacenada en el Backed de S3.
+ - Creamos el output Public Ip y lo almacenamos en el Backend de la instancia
+ 
+ En La carpeta Public_ip_from_backend, alli montaremos:
+ 
+ - El codigo hace un output de la ip publica de la instancia creada desde el backend
+ 
+ 
+
+ 
+ 
+ 
+ 
  
 ## Despliegue 📦
 
