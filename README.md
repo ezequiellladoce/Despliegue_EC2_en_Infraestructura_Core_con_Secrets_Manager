@@ -31,9 +31,9 @@ En la carpeta Deploy_Core tendremos el código para crear la infraestructura bas
 
 ### Descripción del Código:
 
-#### AWS Secret Manager
+#### Infraestructura Core
 
-##### Infraestructura Core
+##### AWS Secret Manager
 
 Con el recurso aws_secretsmanager_secret Creamos en la infraestructura core el Secrets en el servicio de AWS Secret Manager. El código es el Siguinte:
 
@@ -47,7 +47,7 @@ resource "aws_secretsmanager_secret" "secret_key" {
 }
 ```
 
-Con el recurso aws_secretsmanager_secret_version cargamos la clave creada por el recurso tls_private_key. El código es el Siguinte:
+Con el recurso aws_secretsmanager_secret_version cargamos la clave creada por el recurso tls_private_key. El código es el siguinte:
 
 ```
 resource "aws_secretsmanager_secret_version" "secret_priv" {
@@ -55,6 +55,26 @@ resource "aws_secretsmanager_secret_version" "secret_priv" {
   secret_string = tls_private_key.priv_key.private_key_pem
 }
 ```
+
+##### Terrafom Backend
+
+Con terraform Backend poderemos almacenar la configuración de la infraestructura core creada y almacenanrla en forma remota en un bucket S3.
+
+```
+terraform {
+  backend "s3" {
+    bucket = "tfbackup"
+    key    = "tfbkcore/"
+    region = "us-east-2"
+  }
+}
+```
+
+
+
+
+
+## Despliegue 📦
 
 ### Preparamos el ambiente:
 
@@ -65,9 +85,8 @@ resource "aws_secretsmanager_secret_version" "secret_priv" {
 5) Configuramos el AWS CLI https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html
 6) Creamos un Buket S3 con las carpetas tfbkcore y tfbkec2
 
-## Despliegue 📦
 
-### Consideraciones iniciales
+
 
 ### Ejecutamos el despliegue
 
